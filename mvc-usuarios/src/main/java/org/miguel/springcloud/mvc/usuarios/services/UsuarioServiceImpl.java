@@ -11,27 +11,29 @@ import java.util.Optional;
 @Service
 public class UsuarioServiceImpl implements  UsuarioService{
     @Autowired
-    private UsuarioRepository repository;
-    @Override
-    @Transactional(readOnly = true)
-    public List<Usuario> listar() {
-        return (List<Usuario>) repository.findAll();
-    }
+    private UsuarioRepository usuarioRepository;
+
 
     @Transactional(readOnly = true)
-    @Override
-    public Optional<Usuario> porId(Long id) {
-        return repository.findById(id);
+    public List<Usuario> listarUsuarios() {
+        return (List<Usuario>) usuarioRepository.findAll();
     }
-    @Transactional
+
     @Override
-    public Usuario guardar(Usuario usuario) {
-        return repository.save(usuario);
+    @Transactional(readOnly = true)
+    public Optional<Usuario> buscarUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id);
     }
 
     @Override
     @Transactional
-    public void eliminar(Long id) {
-      repository.deleteById(id);
+    public Usuario guardarUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+
+    @Override
+    @Transactional
+    public void eliminarUsuario(Long id) {
+        usuarioRepository.deleteById(id);
     }
 }

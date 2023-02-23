@@ -13,49 +13,47 @@ import java.util.Optional;
 @RestController
 public class UsuarioController {
     @Autowired
-    private UsuarioService service;
+    private UsuarioService usuarioService;
 
     @GetMapping
-    public List<Usuario> listar(){
-        return service.listar();
+    public List<Usuario> listarUsuarios(){
+        return usuarioService.listarUsuarios();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> detalle(@PathVariable Long id){
+    public ResponseEntity<?> listarUsuarioPorId(@PathVariable Long id){
+        Optional<Usuario> usuarioOptional = usuarioService.buscarUsuarioPorId(id);
+        if(usuarioOptional.isPresent())
+            return  ResponseEntity.ok().body(usuarioOptional.get());
 
-       Optional<Usuario> usuarioOptional = service.porId(id);
-       if(usuarioOptional.isPresent()){
-           return  ResponseEntity.ok(usuarioOptional.get());
-       }
-       return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> crear(@RequestBody Usuario usuario){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.guardar(usuario));
+    public ResponseEntity<?> crearUsuario(@RequestBody Usuario usuario){
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardarUsuario(usuario));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> editar(@RequestBody Usuario usuario, @PathVariable Long id){
-        Optional<Usuario> o =service.porId(id);
-        if(o.isPresent()){
-            Usuario usuarioDb = o.get();
-            usuarioDb.setNombre(usuario.getNombre());
-            usuarioDb.setEmail(usuario.getEmail());
-            usuarioDb.setPassword(usuario.getPassword());
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.guardar(usuarioDb));
+    public ResponseEntity<?> editarUsuario(@RequestBody Usuario usuario, @PathVariable Long id){
+        Optional<Usuario> aux = usuarioService.buscarUsuarioPorId(id);
+        if(aux.isPresent()){
+            Usuario editarUsuario = aux.get();
+            editarUsuario.setNombre(usuario.getNombre());
+            editarUsuario.setEmail(usuario.getEmail());
+            editarUsuario.setPassword(usuario.getPassword());
+            return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardarUsuario(editarUsuario));
         }
         return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id){
-        Optional<Usuario> o = service.porId(id);
-        if(o.isPresent()){
-            service.eliminar(id);
+    public ResponseEntity<?> eliminarUsuario(@PathVariable Long id){
+        Optional<Usuario> optionalUsuario = usuarioService.buscarUsuarioPorId(id);
+        if(optionalUsuario.isPresent()){
+            usuarioService.eliminarUsuario(id);
             return ResponseEntity.noContent().build();
         }
-       return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
     }
 }
