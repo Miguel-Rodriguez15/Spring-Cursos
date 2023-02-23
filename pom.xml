@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mvc-usuarios</module>
+        <module>mvc-cursos</module>
     </modules>
 
     <properties>
