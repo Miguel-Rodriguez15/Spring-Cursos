@@ -1,5 +1,6 @@
 package org.miguel.springcloud.mvc.cursos.mvccursos.services;
 
+import org.miguel.springcloud.mvc.cursos.mvccursos.models.Usuario;
 import org.miguel.springcloud.mvc.cursos.mvccursos.models.entity.Curso;
 import org.miguel.springcloud.mvc.cursos.mvccursos.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,20 @@ public class CursoServiceImpl  implements CursoService{
     @Transactional
     public void EliminarCurso(Long id) {
      cursoRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Usuario> asignarUsuarioCurso(Usuario usuario, Long cursoId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Usuario> crearUsuarioCurso(Usuario usuario, Long cursoId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Usuario> desagsinarUsuarioCurso(Usuario usuario, Long cursoId) {
+        return Optional.empty();
     }
 }

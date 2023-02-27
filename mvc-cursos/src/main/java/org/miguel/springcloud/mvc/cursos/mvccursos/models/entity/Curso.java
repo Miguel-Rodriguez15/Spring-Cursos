@@ -1,6 +1,9 @@
 package org.miguel.springcloud.mvc.cursos.mvccursos.models.entity;
 
+import org.miguel.springcloud.mvc.cursos.mvccursos.models.Usuario;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +19,15 @@ public class Curso {
    private String nombre;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "curso_id")
     private List<CursoUsuario> cursoUsuarios;
+
+    @Transient
+    private List<Usuario> usuarios;
 
     public Curso() {
         cursoUsuarios = new ArrayList<>();
+        usuarios = new ArrayList<>();
     }
 
 
@@ -51,5 +59,13 @@ public class Curso {
 
     public void setCursoUsuarios(List<CursoUsuario> cursoUsuarios) {
         this.cursoUsuarios = cursoUsuarios;
+    }
+
+    public List<Usuario> getUsuarios() {
+    return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }
