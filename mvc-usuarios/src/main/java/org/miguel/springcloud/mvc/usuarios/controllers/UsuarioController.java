@@ -32,11 +32,12 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<?> crearUsuario(@Valid @RequestBody Usuario usuario, BindingResult result){
-        if(!usuario.getEmail().isEmpty() && usuarioService.buscarPorEmail(usuario.getEmail()).isPresent()){
-            return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje","ya existe un usuario con este correo!"));
-        }
+
         if(result.hasErrors()){
             return validar(result);
+        }
+        if(!usuario.getEmail().isEmpty() && usuarioService.buscarPorEmail(usuario.getEmail()).isPresent()){
+            return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje","ya existe un usuario con este correo!"));
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioService.guardarUsuario(usuario));
     }
