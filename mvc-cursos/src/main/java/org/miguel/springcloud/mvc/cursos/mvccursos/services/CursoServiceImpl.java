@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class CursoServiceImpl  implements CursoService{
     @Autowired
@@ -29,6 +31,22 @@ public class CursoServiceImpl  implements CursoService{
     @Transactional(readOnly = true)
     public Optional<Curso> BuscarCursoPorId(Long id) {
         return cursoRepository.findById(id);
+    }
+
+    @Override
+    public Optional<Curso> BuscarCursoPorIdConUsuarios(Long id) {
+        Optional<Curso> o = cursoRepository.findById(id);
+        if(o.isPresent()){
+            Curso curso = o.get();
+            if(!curso.getCursoUsuarios().isEmpty()){
+                List<Long> ids = curso.getCursoUsuarios().stream().map(cu -> cu.getUsuarioId())
+                        .collect(Collectors.toList());
+                List<Usuario> usuarios = cliente.obtenerAlumnosPorCurso(ids);
+                curso.setUsuarios(usuarios);
+            }
+            return Optional.of(curso);
+        }
+        return Optional.empty();
     }
 
     @Override
