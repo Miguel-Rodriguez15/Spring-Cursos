@@ -34,6 +34,7 @@ public class CursoServiceImpl  implements CursoService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<Curso> BuscarCursoPorIdConUsuarios(Long id) {
         Optional<Curso> o = cursoRepository.findById(id);
         if(o.isPresent()){
