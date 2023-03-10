@@ -38,6 +38,11 @@ public class UsuarioServiceImpl implements  UsuarioService{
     }
 
     @Override
+    public List<Usuario> ListarUsuariosPorId(Iterable<Long> ids) {
+        return (List<Usuario>) usuarioRepository.findAllById(ids);
+    }
+
+    @Override
     public Optional<Usuario> buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email);
     }

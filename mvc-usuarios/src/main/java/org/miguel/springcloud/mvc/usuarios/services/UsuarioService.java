@@ -14,5 +14,7 @@ public interface UsuarioService {
     Optional<Usuario> buscarUsuarioPorId(Long id);
     Usuario guardarUsuario(Usuario usuario);
     void eliminarUsuario(Long id);
+    List<Usuario> ListarUsuariosPorId(Iterable<Long> ids);
     Optional<Usuario> buscarPorEmail(String email);
+
 }
