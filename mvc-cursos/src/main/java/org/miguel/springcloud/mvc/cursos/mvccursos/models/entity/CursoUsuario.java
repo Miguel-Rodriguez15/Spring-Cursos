@@ -10,8 +10,8 @@ public class CursoUsuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "usuario_id", unique = true)
-    private Long UsuarioId;
+    @Column(name="usuario_id", unique = true)
+    private Long usuarioId;
 
     public Long getId() {
         return id;
@@ -22,11 +22,11 @@ public class CursoUsuario {
     }
 
     public Long getUsuarioId() {
-        return UsuarioId;
+        return usuarioId;
     }
 
     public void setUsuarioId(Long usuarioId) {
-        UsuarioId = usuarioId;
+        this.usuarioId = usuarioId;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class CursoUsuario {
             return false;
         }
         CursoUsuario o = (CursoUsuario) obj;
-        return this.UsuarioId !=null && this.UsuarioId.equals(o.UsuarioId);
+        return this.usuarioId !=null && this.usuarioId.equals(o.usuarioId);
 
     }
 }

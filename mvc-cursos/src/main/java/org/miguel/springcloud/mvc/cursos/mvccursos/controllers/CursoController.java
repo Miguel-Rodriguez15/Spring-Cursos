@@ -132,4 +132,10 @@ public class CursoController {
 
     }
 
+    @DeleteMapping("/eliminar-curso-usuario/{id}")
+    public ResponseEntity<?> eliminarCursoUsuarioPorId(@PathVariable Long id){
+        cursoService.eliminarCursoUsuarioPorId(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

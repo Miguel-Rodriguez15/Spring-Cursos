@@ -64,6 +64,12 @@ public class CursoServiceImpl  implements CursoService{
 
     @Override
     @Transactional
+    public void eliminarCursoUsuarioPorId(Long id) {
+        cursoRepository.eliminarCursoUsuarioPorId(id);
+    }
+
+    @Override
+    @Transactional
     public Optional<Usuario> asignarUsuarioCurso(Usuario usuario, Long cursoId) {
         Optional<Curso> aux = cursoRepository.findById(cursoId);
         if(aux.isPresent()){
