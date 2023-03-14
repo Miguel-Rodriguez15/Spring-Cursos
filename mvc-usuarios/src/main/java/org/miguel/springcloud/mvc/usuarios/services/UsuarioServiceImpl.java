@@ -1,5 +1,6 @@
 package org.miguel.springcloud.mvc.usuarios.services;
 
+import org.miguel.springcloud.mvc.usuarios.clients.CursoClienteRest;
 import org.miguel.springcloud.mvc.usuarios.models.entity.Usuario;
 import org.miguel.springcloud.mvc.usuarios.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,8 @@ import java.util.Optional;
 public class UsuarioServiceImpl implements  UsuarioService{
     @Autowired
     private UsuarioRepository usuarioRepository;
-
+   @Autowired
+   private CursoClienteRest client;
 
     @Transactional(readOnly = true)
     public List<Usuario> listarUsuarios() {
@@ -23,6 +25,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
     @Transactional(readOnly = true)
     public Optional<Usuario> buscarUsuarioPorId(Long id) {
         return usuarioRepository.findById(id);
+
     }
 
     @Override
@@ -35,6 +38,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
     @Transactional
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
+        client.eliminarCursoUsuarioPorId(id);
     }
 
     @Override
