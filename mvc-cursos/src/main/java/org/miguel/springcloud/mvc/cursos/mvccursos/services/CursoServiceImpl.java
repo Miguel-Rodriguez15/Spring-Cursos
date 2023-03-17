@@ -33,6 +33,11 @@ public class CursoServiceImpl  implements CursoService{
         return cursoRepository.findById(id);
     }
 
+     /**
+      * consultame el curso por id
+      * en caso de que si exista y si  no esta vacio
+      * listame los datos del usuario
+      * */
     @Override
     @Transactional(readOnly = true)
     public Optional<Curso> BuscarCursoPorIdConUsuarios(Long id) {
@@ -49,13 +54,17 @@ public class CursoServiceImpl  implements CursoService{
         }
         return Optional.empty();
     }
-
+    /**
+     * metodo paara guardar un curso en BD
+     * */
     @Override
     @Transactional
     public Curso GuardarCurso(Curso curso) {
         return cursoRepository.save(curso);
     }
-
+    /**
+     * metodo paara eliminar un curso en BD por id
+     * */
     @Override
     @Transactional
     public void EliminarCurso(Long id) {
@@ -67,7 +76,11 @@ public class CursoServiceImpl  implements CursoService{
     public void eliminarCursoUsuarioPorId(Long id) {
         cursoRepository.eliminarCursoUsuarioPorId(id);
     }
-
+  /***
+   * consultame por id el curso
+   * en caso de que este presente si envia los paramtros por json
+   * guardandolos en BD
+   * */
     @Override
     @Transactional
     public Optional<Usuario> asignarUsuarioCurso(Usuario usuario, Long cursoId) {
@@ -86,7 +99,11 @@ public class CursoServiceImpl  implements CursoService{
 
         return Optional.empty();
     }
-
+    /***
+     * consultame el curso por id en caso de que este presente
+     * usa el metodo crearUsuario devuele el curso y los datos del usuario
+     * despues agrega el usuario al curso por ultimo guardarlo en el curso
+     * */
     @Override
     @Transactional
     public Optional<Usuario> crearUsuarioCurso(Usuario usuario, Long cursoId) {
@@ -105,7 +122,12 @@ public class CursoServiceImpl  implements CursoService{
 
         return Optional.empty();
     }
-
+    /***
+     * consultame el curso por id en caso de que este presente
+     * listame el usuario por el metodo listarUsuarioPorId
+     * despues por el metodo removeCursoUsuario eliminalo y guarda los cambios
+     * despues agrega el usuario al curso por ultimo guardarlo en el curso
+     * */
     @Override
     @Transactional
     public Optional<Usuario> desasignarUsuarioCurso(Usuario usuario, Long cursoId) {

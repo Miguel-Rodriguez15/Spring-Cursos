@@ -46,10 +46,15 @@ public class Curso {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+      /**
+       * Metodo para agregar un usuario al curso
+       * */
      public void addCursoUsuario(CursoUsuario cursoUsuario){
         cursoUsuarios.add(cursoUsuario);
      }
+     /**
+      * metodo para remover un usuario del curso
+      * **/
      public  void  removeCursoUsuario(CursoUsuario cursoUsuario){
         cursoUsuarios.remove(cursoUsuario);
      }

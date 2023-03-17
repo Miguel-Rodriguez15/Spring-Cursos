@@ -38,6 +38,7 @@ public class UsuarioServiceImpl implements  UsuarioService{
     @Transactional
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
+        ///eliminar el usuario del curso
         client.eliminarCursoUsuarioPorId(id);
     }
 
