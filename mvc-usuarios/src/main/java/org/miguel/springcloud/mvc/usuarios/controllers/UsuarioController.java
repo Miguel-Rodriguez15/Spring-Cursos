@@ -23,8 +23,8 @@ public class UsuarioController {
      * Metodo para el listado de todos los usuarios
      * */
     @GetMapping
-    public List<Usuario> listarUsuarios(){
-        return usuarioService.listarUsuarios();
+    public Map<String,List<Usuario>> listarUsuarios(){
+        return  Collections.singletonMap("usuarios",usuarioService.listarUsuarios());
     }
     /***
      * Metodo para consultar el usuario por ID
