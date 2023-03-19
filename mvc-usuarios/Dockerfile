@@ -1,4 +1,4 @@
-FROM amazoncorretto:11.0.18
+FROM amazoncorretto:11-alpine-jdk as builder
 
 WORKDIR /app/mvc-usuarios
 
@@ -14,7 +14,12 @@ COPY ./mvc-usuarios/src ./src
 
 RUN ./mvnw clean package -DskipTests
 
+FROM amazoncorretto:11-alpine-jdk
+
+WORKDIR /app
+
+COPY --from=builder /app/mvc-usuarios/target/mvc-usuarios-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8001
 
-ENTRYPOINT ["java", "-jar", "./target/mvc-usuarios-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "mvc-usuarios-0.0.1-SNAPSHOT.jar"]
