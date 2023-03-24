@@ -20,6 +20,8 @@ WORKDIR /app
 
 COPY --from=builder /app/mvc-usuarios/target/mvc-usuarios-0.0.1-SNAPSHOT.jar .
 
-EXPOSE 8001
+ENV PORT 8000
+
+EXPOSE $PORT
 
 CMD ["java", "-jar", "mvc-usuarios-0.0.1-SNAPSHOT.jar"]
