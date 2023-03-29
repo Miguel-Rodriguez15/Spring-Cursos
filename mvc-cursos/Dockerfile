@@ -17,7 +17,7 @@ RUN ./mvnw clean package -DskipTests
 FROM amazoncorretto:11-alpine-jdk
 
 WORKDIR /app
-
+RUN mkdir ./logs
 COPY --from=builder /app/mvc-cursos/target/mvc-cursos-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8002
