@@ -1,0 +1,68 @@
+version: "3.9"
+services:
+  #MY SQL
+  mysql:
+    container_name: mysql
+    image: mysql:8.0
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: mvc_usuarios
+    volumes:
+      - data-mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - spring
+
+  #POSTGRESQL
+  postgres14:
+    container_name: postgres14
+    image: postgres:14-alpine
+    ports:
+      - "5532:5432"
+    environment:
+      POSTGRES_PASSWORD: miguel098
+      POSTGRES_DB: mvc_cursos
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - spring
+
+
+  mvc-usuarios:
+    container_name:  mvc-usuarios
+    image: usuarios:latest
+    ports:
+      - "8001:8001"
+    env_file: ./mvc-usuarios/.env
+    networks:
+      - spring
+    depends_on:
+      - mysql
+    restart: always
+
+
+  mvc-cursos:
+    container_name: mvc-cursos
+    image: cursos:latest
+    ports:
+      - "8002:8002"
+    env_file:
+      - ./mvc-cursos/.env
+    networks:
+      - spring
+    restart: always
+
+volumes:
+  data-mysql:
+    name: data-mysql
+  data-postgres:
+    name: data-postgres
+
+
+networks:
+  spring:
+    name: spring
+
