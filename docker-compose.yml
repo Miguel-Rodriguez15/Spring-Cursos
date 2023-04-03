@@ -33,9 +33,10 @@ services:
 
   mvc-usuarios:
     container_name:  mvc-usuarios
-    build:
-      context: ./
-      dockerfile: ./mvc-usuarios/Dockerfile
+    image: miguelrodriguez15/usuarios:latest
+#    build:
+#      context: ./
+#      dockerfile: ./mvc-usuarios/Dockerfile
     ports:
       - "8001:8001"
     env_file: ./mvc-usuarios/.env
@@ -48,9 +49,10 @@ services:
 
   mvc-cursos:
     container_name: mvc-cursos
-    build:
-      context: ./
-      dockerfile: ./mvc-cursos/Dockerfile
+    image: miguelrodriguez15/cursos:latest
+#    build:
+#      context: ./
+#      dockerfile: ./mvc-cursos/Dockerfile
     ports:
       - "8002:8002"
     env_file:
