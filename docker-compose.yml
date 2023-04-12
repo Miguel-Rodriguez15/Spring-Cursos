@@ -39,7 +39,13 @@ services:
 #      dockerfile: ./mvc-usuarios/Dockerfile
     ports:
       - "8001:8001"
-    env_file: ./mvc-usuarios/.env
+    environment:
+      PORT: 8001
+      DB_HOST: mysql:3306
+      DB_DATABASE: mvc_usuarios
+      DB_USERNAME: root
+      DB_PASSWORD:
+      CURSOS_URL: mvc-cursos:8002
     networks:
       - spring
     depends_on:
@@ -55,8 +61,13 @@ services:
 #      dockerfile: ./mvc-cursos/Dockerfile
     ports:
       - "8002:8002"
-    env_file:
-      - ./mvc-cursos/.env
+    environment:
+      PORT: 8002
+      DB_HOST: postgres14:5432
+      DB_DATABASE: mvc_cursos
+      DB_USERNAME: postgres
+      DB_PASSWORD: miguel098
+      USUARIOS_URL: mvc-usuarios:8001
     networks:
       - spring
     depends_on:
