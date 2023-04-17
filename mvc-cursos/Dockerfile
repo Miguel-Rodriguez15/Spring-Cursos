@@ -21,5 +21,5 @@ RUN mkdir ./logs
 COPY --from=builder /app/mvc-cursos/target/mvc-cursos-0.0.1-SNAPSHOT.jar .
 
 EXPOSE 8002
-
-CMD ["java", "-jar", "mvc-cursos-0.0.1-SNAPSHOT.jar"]
+CMD sleep 10 && java -jar mvc-cursos-0.0.1-SNAPSHOT.jar
+#CMD ["java", "-jar", "mvc-cursos-0.0.1-SNAPSHOT.jar"]
