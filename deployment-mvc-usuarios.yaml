@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mvc-usuarios
+spec:
+  selector:
+    matchLabels:
+      app: mvc-usuarios
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mvc-usuarios
+    spec:
+      containers:
+        - name: mvc-usuarios
+          image: miguelrodriguez15/usuarios:latest
+          ports:
+            - containerPort: 8001
+          env:
+            - name: PORT
+              value: "8001"
+            - name: DB_HOST
+              value: "mysql:3306"
+            - name: DB_DATABASE
+              value: "mvc_usuarios"
+            - name: DB_USERNAME
+              value: "root"
+            - name: DB_PASSWORD
+              value: "" # Asigna un valor vacío a DB_PASSWORD
+            - name: CURSOS_URL
+              value: "mvc-cursos:8002"
