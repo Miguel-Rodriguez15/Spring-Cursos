@@ -3,6 +3,8 @@ package org.miguel.springcloud.mvc.usuarios.controllers;
 import org.miguel.springcloud.mvc.usuarios.models.entity.Usuario;
 import org.miguel.springcloud.mvc.usuarios.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,12 +21,20 @@ import java.util.*;
 public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private ApplicationContext context;
+
+    @GetMapping("/crash")
+    public void crash(){
+        ((ConfigurableApplicationContext)context).close();
+    }
     /***
      * Metodo para el listado de todos los usuarios
      * */
     @GetMapping
     public Map<String,List<Usuario>> listarUsuarios(){
-        return  Collections.singletonMap("usuarios",usuarioService.listarUsuarios());
+        return  Collections.singletonMap("Users",usuarioService.listarUsuarios());
     }
     /***
      * Metodo para consultar el usuario por ID
