@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mvc-cursos
+spec:
+  selector:
+    matchLabels:
+      app: mvc-cursos
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mvc-cursos
+    spec:
+      containers:
+        - name: mvc-cursos
+          image: miguelrodriguez15/cursos:latest
+          ports:
+            - containerPort: 8002
+          env:
+            - name: PORT
+              value: "8002"
+            - name: DB_HOST
+              value: "postgres14:5432"
+            - name: DB_DATABASE
+              value: "mvc_cursos"
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: miguel098
+            - name: USUARIOS_URL
+              value: "mvc-usuarios:8001"
