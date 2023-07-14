@@ -22,5 +22,13 @@ spec:
               value: miguel098
             - name:  POSTGRES_DB
               value: mvc_cursos
+          volumeMounts:
+            - name: data-postgres
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: data-postgres
+          hostPath:
+            path: /var/lib/postgresql/data
+            type: DirectoryOrCreate
 
 
