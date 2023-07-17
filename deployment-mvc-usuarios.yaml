@@ -19,14 +19,32 @@ spec:
             - containerPort: 8001
           env:
             - name: PORT
-              value: "8001"
+              valueFrom:
+                configMapKeyRef:
+                  name: mvc-usuarios
+                  key: port
             - name: DB_HOST
-              value: "mysql:3306"
+              valueFrom:
+                configMapKeyRef:
+                  name: mvc-usuarios
+                  key: db_host
             - name: DB_DATABASE
-              value: "mvc_usuarios"
+              valueFrom:
+                configMapKeyRef:
+                  name: mvc-usuarios
+                  key: database
             - name: DB_USERNAME
-              value: "root"
+              valueFrom:
+                configMapKeyRef:
+                  name: mvc-usuarios
+                  key: username
             - name: DB_PASSWORD
-              value: "" # Asigna un valor vacío a DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: mvc-usuarios
+                  key: password2
             - name: CURSOS_URL
-              value: "mvc-cursos:8002"
+              valueFrom:
+                configMapKeyRef:
+                  name: mvc-usuarios
+                  key: curso_url
