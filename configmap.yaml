@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mvc-usuarios
+data:
+  port: "8001"
+  db_host: mysql:3306
+  database: mvc_usuarios
+  username: root
+  password: "1" # clave vacia para la conexion de la imagen de base de datos
+  password2: "" # clave para poder realizar la conexion de microservicios usuarios a la BD MYSQL
+  curso_url: mvc-cursos:8002
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mvc-cursos
+data:
+  port: "8002"
+  db_host: postgres14:5432
+  database: mvc_cursos
+  username: postgres
+  password: miguel098
+  usuarios_url: mvc-usuarios:8001
