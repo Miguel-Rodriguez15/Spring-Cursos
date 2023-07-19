@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * Clase curso para cliente rest comuncacion entre microservicios
  * y uso de los metodos del microservico curso
  * */
-@FeignClient(name = "mvc-cursos", url = "${mvc.cursos.url}" )
+@FeignClient(name = "mvc-cursos" )
 public interface CursoClienteRest {
     @DeleteMapping("/eliminar-curso-usuario/{id}")
     void eliminarCursoUsuarioPorId(@PathVariable Long id);

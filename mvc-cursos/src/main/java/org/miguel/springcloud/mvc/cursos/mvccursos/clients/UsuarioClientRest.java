@@ -9,7 +9,7 @@ import java.util.List;
  * Clase usuario para cliente rest comuncacion entre microservicios
  * y uso de los metodos del microservico usuario
  * */
-@FeignClient(name = "mvc-usuarios", url = "${mvc.usuarios.url}")
+@FeignClient(name = "mvc-usuarios")
 public interface UsuarioClientRest {
 
     @GetMapping("/{id}")
