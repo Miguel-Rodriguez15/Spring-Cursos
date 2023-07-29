@@ -3,6 +3,7 @@ package org.miguel.springcloud.mvc.usuarios.controllers;
 import org.miguel.springcloud.mvc.usuarios.models.entity.Usuario;
 import org.miguel.springcloud.mvc.usuarios.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -22,9 +23,16 @@ public class UsuarioController {
     /***
      * Metodo para el listado de todos los usuarios
      * */
+    @Autowired
+    private Environment env;
     @GetMapping
-    public Map<String,List<Usuario>> listarUsuarios(){
-        return  Collections.singletonMap("usuarios",usuarioService.listarUsuarios());
+    public ResponseEntity<?>  listarUsuarios(){
+        Map<String,Object> body = new HashMap<>();
+        body.put("usuarios",usuarioService.listarUsuarios());
+        body.put("pod_info",env.getProperty("MY_POD_NAME") + ": " + env.getProperty("MY_POD_IP"));
+
+        //return  Collections.singletonMap("usuarios",usuarioService.listarUsuarios());
+        return ResponseEntity.ok(body);
     }
     /***
      * Metodo para consultar el usuario por ID
