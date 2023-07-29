@@ -10,6 +10,10 @@ data:
   password: "1" # clave vacia para la conexion de la imagen de base de datos
   password2: "" # clave para poder realizar la conexion de microservicios usuarios a la BD MYSQL
   curso_url: mvc-cursos:8002
+  application.yaml: |-
+    config:
+      texto: configuracion de ambiente por defecto
+         
 
 ---
 apiVersion: v1
