@@ -3,6 +3,8 @@ package org.miguel.springcloud.mvc.usuarios.controllers;
 import org.miguel.springcloud.mvc.usuarios.models.entity.Usuario;
 import org.miguel.springcloud.mvc.usuarios.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,13 @@ public class UsuarioController {
      * */
     @Autowired
     private Environment env;
+    @Autowired
+    private ApplicationContext context;
+
+    @GetMapping("/crash")
+    public void crash(){
+        ((ConfigurableApplicationContext)context).close();
+    }
     @GetMapping
     public ResponseEntity<?>  listarUsuarios(){
         Map<String,Object> body = new HashMap<>();
