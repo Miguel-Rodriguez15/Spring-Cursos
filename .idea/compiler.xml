@@ -8,12 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mvc-usuarios" />
         <module name="mvc-cursos" />
+        <module name="mvc-gateway" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="mvc-cursos" options="-parameters" />
+      <module name="mvc-gateway" options="-parameters" />
       <module name="mvc-usuarios" options="-parameters" />
     </option>
   </component>
