@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mvc-gateway
+spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        role: mvc-gateway
+    template:
+      metadata:
+        labels:
+          role: mvc-gateway
+      spec:
+        containers:
+          - name: mvc-gateway
+            image: miguelrodriguez15/gateway:latest
+            ports:
+              - containerPort: 8090
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mvc-gateway
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8090
+      targetPort: 8090
+  selector:
+    role: mvc-gateway
