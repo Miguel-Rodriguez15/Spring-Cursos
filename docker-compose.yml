@@ -33,7 +33,7 @@ services:
 
   mvc-usuarios:
     container_name:  mvc-usuarios
-    image: miguelrodriguez15/usuarios:latest
+    image: miguelrodriguez15/usuarios:v4
 #    build:
 #      context: ./
 #      dockerfile: ./mvc-usuarios/Dockerfile
@@ -55,7 +55,7 @@ services:
 
   mvc-cursos:
     container_name: mvc-cursos
-    image: miguelrodriguez15/cursos:latest
+    image: miguelrodriguez15/cursos:v2
 #    build:
 #      context: ./
 #      dockerfile: ./mvc-cursos/Dockerfile
