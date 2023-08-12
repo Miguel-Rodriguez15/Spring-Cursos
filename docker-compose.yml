@@ -30,13 +30,12 @@ services:
     networks:
       - spring
 
-
   mvc-usuarios:
-    container_name:  mvc-usuarios
+    container_name: mvc-usuarios
     image: miguelrodriguez15/usuarios:v4
-#    build:
-#      context: ./
-#      dockerfile: ./mvc-usuarios/Dockerfile
+    #    build:
+    #      context: ./
+    #      dockerfile: ./mvc-usuarios/Dockerfile
     ports:
       - "8001:8001"
     environment:
@@ -52,13 +51,24 @@ services:
       - mysql
     restart: always
 
+  mvc-gateway:
+    container_name: mvc-gateway
+    image: miguelrodriguez15/gateway:v3
+    #    build:
+    #      context: ./
+    #      dockerfile: ./mvc-usuarios/Dockerfile
+    ports:
+      - "9000:9000"
+    networks:
+      - spring
+    restart: always
 
   mvc-cursos:
     container_name: mvc-cursos
     image: miguelrodriguez15/cursos:v2
-#    build:
-#      context: ./
-#      dockerfile: ./mvc-cursos/Dockerfile
+    #    build:
+    #      context: ./
+    #      dockerfile: ./mvc-cursos/Dockerfile
     ports:
       - "8002:8002"
     environment:
@@ -81,8 +91,6 @@ volumes:
   data-postgres:
     name: data-postgres
 
-
 networks:
   spring:
     name: spring
-
