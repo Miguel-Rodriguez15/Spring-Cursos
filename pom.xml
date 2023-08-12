@@ -15,6 +15,7 @@
         <module>mvc-usuarios</module>
         <module>mvc-cursos</module>
         <module>mvc-gateway</module>
+        <module>mvc-auth</module> 
     </modules>
 
     <properties>
